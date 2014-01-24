@@ -1,0 +1,23 @@
+Xsession: X session started for pi at Tue Jan 21 19:59:16 UTC 2014
+localuser:pi being added to access control list
+Obt-Message: Xinerama extension is not present on the server
+Openbox-Message: Unable to find a valid menu file "/usr/share/lxde/openbox/menu.xml"
+
+(iceweasel:2337): libnotify-WARNING **: Failed to connect to proxy
+
+(pcmanfm:2161): Gtk-WARNING **: Radio group does not contain an action with value '0'
+
+(pcmanfm:2161): Gtk-WARNING **: Radio group does not contain an action with value '0'
+
+** (lxsession-logout:19576): WARNING **: dbus-interface.c:94: DBUS: The name org.freedesktop.UPower was not provided by any .service files
+
+** (lxsession-logout:19576): WARNING **: dbus-interface.c:94: DBUS: The name org.freedesktop.UPower was not provided by any .service files
+
+** (lxsession-logout:19576): WARNING **: dbus-interface.c:94: DBUS: The name org.freedesktop.Hal was not provided by any .service files
+
+** (lxsession-logout:19576): WARNING **: dbus-interface.c:94: DBUS: The name org.freedesktop.Hal was not provided by any .service files
+XIO:  fatal IO error 11 (Resource temporarily unavailable) on X server ":0"
+      after 174098 requests (174098 known processed) with 0 events remaining.
+lxpolkit: Fatal IO error 11 (Resource temporarily unavailable) on X server :0.
+lxterminal: Fatal IO error 0 (Success) on X server :0.0.
+pcmanfm: Fatal IO error 0 (Success) on X server :0.

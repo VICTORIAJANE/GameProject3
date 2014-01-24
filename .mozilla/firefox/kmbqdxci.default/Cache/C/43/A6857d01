@@ -1,0 +1,856 @@
+<!-- ClickTale Top part -->
+<script type="text/javascript">
+var WRInitTime=(new Date()).getTime();
+</script>
+<!-- ClickTale end of Top part -->
+
+<!DOCTYPE html> 
+<html lang="en-US">
+
+<head>
+	<link rel="shortcut icon" href="http://quick2wire.com/wp-content/themes/picochic/favicon.ico" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>A gentle guide to Git and GitHub | Quick2Wire</title>
+		<link rel="stylesheet" href="http://quick2wire.com/wp-content/themes/picochic/style.css" type="text/css" media="screen" />
+	<link rel="pingback" href="http://quick2wire.com/xmlrpc.php" />
+
+	<!-- HTML5 for IE < 9 -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+  <link rel="alternate" type="application/rss+xml" title="Quick2Wire &raquo; Feed" href="http://quick2wire.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Quick2Wire &raquo; Comments Feed" href="http://quick2wire.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Quick2Wire &raquo; A gentle guide to Git and GitHub Comments Feed" href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/feed/" />
+<script type='text/javascript' src='http://quick2wire.com/wp-includes/js/comment-reply.min.js?ver=3.5.2'></script>
+<script type='text/javascript' src='http://quick2wire.com/wp-includes/js/jquery/jquery.js?ver=1.8.3'></script>
+<script type='text/javascript' src='http://quick2wire.com/wp-content/themes/picochic/js/scripts.js?ver=3.5.2'></script>
+<script type='text/javascript' src='http://quick2wire.com/wp-content/themes/picochic/js/respond.min.js?ver=3.5.2'></script>
+<script type='text/javascript' src='http://quick2wire.com/wp-content/themes/picochic/js/jquery-1.7.2.min.js?ver=3.5.2'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://quick2wire.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://quick2wire.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='I2C and SPI' href='http://quick2wire.com/articles/i2c-and-spi/' />
+<link rel='next' title='Privacy' href='http://quick2wire.com/about-us/privacy/' />
+<meta name="generator" content="WordPress 3.5.2" />
+<link rel='canonical' href='http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/' />
+<link rel='shortlink' href='http://wp.me/P3LCwj-1F' />
+
+
+	<style type="text/css">
+		a, #comments h3, h3#reply-title {
+			color: #364D96;
+		}
+		
+        ::selection, ::-moz-selection {
+			background: rgba(54,77,150,0.8);
+			color: #fff;
+		}
+		
+		.format-link h2 a, #header-image-div {
+			background: #364D96;
+		}
+		
+		@media screen and (max-width: 850px) {
+			nav ul li a:active, nav ul li a:focus, nav ul li a:hover {
+				background: #364D96;
+			}
+		}
+
+		input[type="submit"]:hover, button:hover, .navigation a:hover, input[type="submit"]:active, button:active, .navigation a:active, input[type=submit]:focus, button:focus, .navigation a:focus {
+			box-shadow: 0 0 4px rgba(54,77,150,0.8);
+			border: 1px solid rgba(54,77,150,0.8)!important;
+		}
+
+		input:focus, textarea:focus {
+			box-shadow: inset 0 0 3px rgba(54,77,150,0.2);
+			border: 1px solid rgba(54,77,150,0.2);
+		}
+            
+            .special-border {
+              border: solid thin rgba(54,77,150,0.8);
+            }
+            .special-font {
+              color: #364D96;
+            }
+
+	</style>
+
+	<style type="text/css">
+		header h1, header .description {display: none;}
+	</style>
+
+
+	<style type="text/css">
+		#headersearch {
+			display: none;
+		}
+	</style>
+
+
+	<style type="text/css">
+		@media screen and (min-width: 851px) {
+			#headerimage {
+				height: 42px;
+			}
+		}
+	</style>
+
+
+  <!-- Quick2Wire modification -->
+  <script>
+
+    window.debugEventTracker = false; // Override in console for testing
+
+    // Bind element event to Google Analytics tracker
+    function bindEventTracker(selector, eventType, message) {
+      if ($(selector).length < 1 && window.console) {
+        console.warn('bindEventTracker - Could not find: ' + selector);
+      }
+      $(selector).on(eventType, function(event) {
+        if (window.debugEventTracker) {
+          alert('Track Event: ' + message);
+          event.preventDefault();
+        } else {
+          window._gaq && _gaq.push(['_trackEvent', message]);
+        }
+      });
+    }
+
+    $(function() {
+      bindEventTracker('.widget_social_links .rss',     'click',        'Follow RSS');
+      bindEventTracker('.widget_social_links .rss',     'contextmenu',  'Right-click RSS');
+      bindEventTracker('.widget_social_links .twitter', 'click',        'Follow Twitter');
+    });
+  </script>
+  <!-- End Quick2Wire modification -->
+</head>
+
+<body class="page page-id-103 page-child parent-pageid-97 page-template-default">
+<div id="wrapper">
+	<header id="header">
+
+
+		<section id="head">
+			<a href="http://quick2wire.com"><img id="logo" src="http://quick2wire.com/wp-content/uploads/2013/07/quick2wire-website-logo1-300x63.png" alt="Quick2Wire" /></a>			<h1><a href="http://quick2wire.com">Quick2Wire</a></h1>
+			<p class="description"></p>
+		</section>
+
+		
+		<button id="showmenu">Menu</button>
+		<form method="get" id="mobilesearch" action="http://quick2wire.com" >
+			<label class="hidden" for="s">Search:</label>
+			<div>
+				<input type="text" value="" name="s" id="s" /><input type="submit" id="searchsubmit" value="Search" /> 
+			</div>
+		</form>
+		
+		<nav id="mobnav">
+			<div class="menu-top-level-container"><ul id="menu-top-level" class="menu"><li id="menu-item-503" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-503"><a href="http://quick2wire.com/about-quick2wire/">Home</a></li>
+<li id="menu-item-515" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-515"><a href="http://www.skpang.co.uk/catalog/raspberry-pi-quick2wire-boards-c-240_248.html">Shop</a></li>
+<li id="menu-item-502" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-502"><a href="http://quick2wire.com/newsletter/">Newsletter</a></li>
+<li id="menu-item-507" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-507"><a href="http://quick2wire.com/products/">Products</a>
+<ul class="sub-menu">
+	<li id="menu-item-563" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-563"><a href="http://quick2wire.com/products/quick2wire-interface-board-kit/">Quick2Wire Interface Board Kit</a></li>
+	<li id="menu-item-562" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-562"><a href="http://quick2wire.com/products/quick2wire-i2c-port-expander-board-kit/">Quick2Wire I2C Port Expander Board Kit</a></li>
+	<li id="menu-item-572" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-572"><a href="http://quick2wire.com/products/quick2wire-i2c-analogue-board-kit/">Quick2Wire I2C Analogue Board Kit</a></li>
+	<li id="menu-item-571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-571"><a href="http://quick2wire.com/products/4-ch-relay-board-kit/">4-Ch Relay Board Kit</a></li>
+</ul>
+</li>
+<li id="menu-item-494" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-494"><a href="http://quick2wire.com/newsletter/">Newsletter</a></li>
+<li id="menu-item-505" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-505"><a href="https://groups.google.com/d/forum/quick2wire-users">Discussion Group</a></li>
+<li id="menu-item-500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-500"><a href="http://quick2wire.com/resources/">Distributors</a></li>
+<li id="menu-item-518" class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current-menu-ancestor current-menu-parent current-page-parent current_page_parent current_page_ancestor menu-item-518"><a title="Articles" href="http://quick2wire.com/articles/">Articles</a>
+<ul class="sub-menu">
+	<li id="menu-item-541" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-541"><a href="http://quick2wire.com/articles/testing-the-i2c-analogue-board-part-1/">Testing the I2C Analogue Board &#8211; part 1</a></li>
+	<li id="menu-item-542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-542"><a href="http://quick2wire.com/articles/getting-started-with-quick2wire-boards/">Getting Started With Quick2Wire Boards</a></li>
+	<li id="menu-item-543" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-543"><a href="http://quick2wire.com/articles/beta-kit/">Getting Started with the Beta kit</a></li>
+	<li id="menu-item-544" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-544"><a href="http://quick2wire.com/articles/how-to-add-quick2wire-as-a-raspbian-software-source/">How to Add Quick2Wire as a Raspbian Software Source</a></li>
+	<li id="menu-item-545" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-545"><a href="http://quick2wire.com/articles/physical-python-part-1/">Physical Python &#8211; Part 1</a></li>
+	<li id="menu-item-546" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-546"><a href="http://quick2wire.com/articles/working-safely-with-your-pi/">Working safely with your Pi</a></li>
+	<li id="menu-item-547" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-103 current_page_item menu-item-547"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/">A gentle guide to Git and GitHub</a></li>
+	<li id="menu-item-548" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-548"><a href="http://quick2wire.com/articles/i2c-and-spi/">I2C and SPI</a></li>
+</ul>
+</li>
+<li id="menu-item-459" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459"><a href="http://quick2wire.com/about-us/">About Us</a></li>
+</ul></div>		</nav>
+
+
+	</header>
+
+	<section id="main">
+
+
+
+     
+
+
+	<div id="content">
+
+				<article class="pages">
+			<div class="title">
+				<h1><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/" title="A gentle guide to Git and GitHub">A gentle guide to Git and GitHub</a></h1>
+			</div>
+			<div class="meta">
+							</div>
+			
+			<div class="entry">
+				<h2>Installing third-party software</h2>
+<p>If you&#8217;re thinking of using our libraries (or other third-party libraries) on your Raspberry Pi, you&#8217;ve probably seen references to git and GitHub. You may be a veteran git user, in which case you can skip this article, but if git or GitHub are unfamiliar to you, read on.</p>
+<p>Let&#8217;s start by taking a step back. If you want to use someone elses&#8217; software library, there are several different ways in which you might be able to install it.</p>
+<ol>
+<li>You might download an archive (typically a zip or tgz file). You&#8217;ll usually need to unpack the archive and run some kind of installation script. That&#8217;s one way you can install our gpio-admin and quick2wire-python-api libraries.</li>
+<li>If you&#8217;re lucky, the library might be packaged as a Debian package (let&#8217;s say it&#8217;s called glockenspiel) and stored in a repository. In that case, you&#8217;ll be able to install it by invoking</li>
+</ol>
+<pre>sudo apt-get install glockenspiel</pre>
+<p>and the package should then be available for use.</p>
+<p>We&#8217;ll package each of our libraries like that eventually, but only when they are stable and complete. That may take a while.</p>
+<h2>The problem of fast-changing code</h2>
+<p>At present we&#8217;re changing and extending the quick2wire-python-api code quite frequently, and we&#8217;ll update the gpio-admin library whenever we fix a bug or add a feature. If you use either of the earlier methods to install software and that software is changing fast, it&#8217;s likely that your version will be out-of-date, and you may not even know it.</p>
+<p>That&#8217;s where git comes in.</p>
+<h2>Git</h2>
+<p><a href="http://en.wikipedia.org/wiki/Git_(software)" target="_blank">Git</a> is a <a href="http://git-scm.com/about/free-and-open-source">free and open source</a> distributed version control system. Let&#8217;s take that apart bit by bit.</p>
+<p>Git is free and open source. You don&#8217;t need to pay to use it, and the source code is freely available. In practice that means that many pairs of eyes will be scanning the code and reading any bug reports, so defects in the code are likely to be found and fixed quickly.</p>
+<p>But what does git do?</p>
+<p>The fact that it&#8217;s a version control system means that it can help you keep track of files that are frequently changed. Most version control systems maintain a history of changes and make it easy for users to compare versions, to load previous versions, and to add new versions as appropriate. Most software developers use a version control system of some sort, and many use git.</p>
+<p>Git has a range of features which make it attractive to developers, and one of those features is the fact that it supports <em>distributed</em> development. In other words, git is designed for use by teams in which the developers work in more than one location. Most of the developers at Quick2wire have day jobs and we work on our software from home, so a distributed version control system is really useful to us.</p>
+<p>You don&#8217;t need to know about we how we use git in our development process. The thing that matters is that you can use git, simply and easily, to get the latest version of our software on your Raspberry Pi.</p>
+<p>Git expects developers to keep all the files for a project or library together in something called a repository. That&#8217;s just a grand name for a collection of files that belong together. All of our libraries are stored in git repositories, and those repositories are stored on GitHub.</p>
+<h2>GitHub</h2>
+<p>Hopefully that&#8217;s given you a feel for git and why we use it, but what about GitHub?</p>
+<p><a href="https://github.com/">GitHub</a> is a web-based service for people who want to use git. It&#8217;s widely used by teams who want to make some or all of their work publicly available under an open source license. Since that&#8217;s what we do, we feel that GitHub is a natural choice for us to store our code.</p>
+<p>If you want to keep up-to-date with the code we&#8217;ve published on GitHub, you will need to install and use git.</p>
+<h2>Installing Git on your Pi</h2>
+<p>To install git, just pen a terminal window by typing Ctrls-Alt-T and invoke</p>
+<pre>sudo apt-get install git-core</pre>
+<p>You&#8217;ll be asked for your password and so long as your Pi has access to the internet and the debian RasPi repository is on-line you&#8217;ll see some activity which will show what&#8217;s going on as git is installed.</p>
+<p>Once that stops you&#8217;ll be ready to go.</p>
+<h2>Using git to download our code</h2>
+<p>When you first install a local copy of a repository using git, you do so by creating what&#8217;s called a <em>clone</em> of the repository.</p>
+<p>If you take a look at the web-page for our quick2wire-python-api library, at the top of the web- page you&#8217;ll see a panel that looks like this:</p>
+<div id="attachment_105" class="wp-caption aligncenter" style="width: 944px"><a href="http://quick2wire.com/wp-content/uploads/2012/05/github1.png"><img class="size-full wp-image-105 " title="github" alt="Project URI panel on GitHub" src="http://quick2wire.wpengine.com/wp-content/uploads/2012/05/github1.png" width="934" height="245" /></a><p class="wp-caption-text">Project URI panel on GitHub</p></div>
+<p>In order to install a local copy of the repository, click on the button marked &#8216;Git Read-Only&#8217; and copy the text of the URI on its right. In our case, that&#8217;s <em>git://github.com/quick2wire/quick2wire-python-api.git</em></p>
+<p>It&#8217;s probably best to keep all your GitHub-based repositores in one place, so you may want to create a directory called git within your home directory. (In a command window, type <em>cd ~</em></p>
+<p>and then type <em>mkdir git</em>)</p>
+<p>When you have done so, open a command window if necessary, change to your git directory by typing <em>cd ~/git </em>and create a copy of the GitHub content by typing</p>
+<pre>git clone git://github.com/quick2wire/quick2wire-python-api.git</pre>
+<p>Git will tell you that it&#8217;s created an empty repository and will then pull down all the current files from the repository on GitHub.</p>
+<p>The README file on Git should tell you what do do to install the software in the repository.  in our case the recommended approach is to add the location of your new cloned repository to your Python Path.</p>
+<p>Now you can use the software.</p>
+<p>But how do you keep it up to date?</p>
+<h2>Keeping current</h2>
+<p>If you take  look at the GitHub page for a repository you can see when the files were last changed. If you open an account at GitHub (which has a free account option) you can chose to <em>watch</em> one or more repositories, in which case you will get notified whenever the repsoitory changes.</p>
+<p>If a repository you&#8217;ve cloned has changed since you last updated it, it&#8217;s really easy to get back up-to-date. In a command window, change to the directory in which you cloned the repository. In our case, you&#8217;d type <em>cd ~/git/quick2wire-python-api</em> in a command window. Now just type <em>git pull</em> and git will update your repository so that it&#8217;s an exact copy of the current version on GitHub.</p>
+<p>Depending on the way type of software in the repository, you may or may not need to repeat the installation procedure. If you&#8217;ve updated out gpio-admin repository, you&#8217;ll need to run through the installation process again, as described in the README for that repository in GitHub. In the case of the quick2wire-python-api package, you&#8217;ve already placed the code on your PythonPath so you should be ready to use the updated library without doing anything else.</p>
+<h2>Summary</h2>
+<p>You can use most code on GitHub by downloading, unpacking and installing an archive containing the code.</p>
+<p>If the code is changing fast, and you want to stay up-to-date you may prefer to install git, use the clone command to create a local copy of the repository, and use the git pull command to refresh your copy when the version on GitHub has changed.</p>
+
+							</div>
+		</article>
+				<div id="comments">
+              <h3>22 Comments</h3>
+      
+			<div class="comment-nav">
+				<div class="alignleft"></div>
+				<div class="alignright"></div>
+			</div>
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-45">
+		<div class="comment_gravatar">
+			<img alt='' src='http://0.gravatar.com/avatar/0ae97a91766285b5fc905d01b810df3f?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-45" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn"><a href='http://-' rel='external nofollow' class='url'>Emily</a></span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-45"><time pubdate datetime="2012-06-10T13:45:38+00:00">June 10, 2012 at 13:45</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>Thanks for the great simple guides.</p>
+<p>I am having a couple of problems though, and i was wondering if you could help me? My pi is connected to the internet with an ethernet cable connected to my mac.  I think because of this I don&#8217;t get a ip address when I follow your SSH guide.  This wouldn&#8217;t be a problem, except that when I try and install the GIT information my pi &#8216;cannot resolve &#8216;ftp.uk.debian.org&#8221;.  I think the connection method is probably my problem,  but can you see anything else I could be missing?  (When I check with CyberDuck i can see the debian ftp on my mac)</p>
+<p>Thank-you so much,<br />
+Emily</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=45#respond' onclick='return addComment.moveForm("comment-45", "45", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	</li>
+	<li class="comment byuser comment-author-joewalnes odd alt thread-odd thread-alt depth-1" id="li-comment-46">
+		<div class="comment_gravatar">
+			<img alt='' src='http://0.gravatar.com/avatar/86f1114bf2478ed381a9b262a3572215?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-46" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">joewalnes</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-46"><time pubdate datetime="2012-06-11T00:53:57+00:00">June 11, 2012 at 00:53</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>Hi Emily,</p>
+<p>You will need to enable Internet sharing on your Mac.</p>
+<p>Open up &#8216;System Preferences&#8217; on your Mac, goto &#8216;Sharing&#8217; (in &#8216;Internet and Wireless&#8217; section), and enable &#8216;Internet Sharing&#8217;.</p>
+<p>I&#8217;m guessing that your Mac is using wifi to connect to the Internet, so next to &#8216;Share your connection from:&#8217;, choose &#8216;AirPort&#8217;. The next to &#8216;To computers using:&#8217;, choose &#8216;Ethernet&#8217;.</p>
+<p>Thanks<br />
+-Joe</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=46#respond' onclick='return addComment.moveForm("comment-46", "46", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	</li>
+</li>
+	<li class="comment even thread-even depth-1" id="li-comment-48">
+		<div class="comment_gravatar">
+			<img alt='' src='http://0.gravatar.com/avatar/263e3bf374f10776be5f2c0f48d365dd?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-48" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">ROBIN</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-48"><time pubdate datetime="2012-12-21T10:42:45+00:00">December 21, 2012 at 10:42</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>git clone git://github.com/quick2wire/quick2wire-python-api.git does not work today.<br />
+Cloning into &#8216;quick2wire-gpio-admin&#8217;&#8230;<br />
+fatal: unable to connect to github.com:<br />
+github.com[0: 207.97.227.239]: errno=Connexion terminee par expiration du delai d&#8217;attente</p>
+<p>I am able to ping the site, to see it in the web browser but no to clone it?</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=48#respond' onclick='return addComment.moveForm("comment-48", "48", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-romilly-cocking bypostauthor odd alt depth-2" id="li-comment-49">
+		<div class="comment_gravatar">
+			<img alt='' src='http://0.gravatar.com/avatar/a92de8a103246b99e073fd63f360f878?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-49" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn"><a href='http://www.quick2wire.com' rel='external nofollow' class='url'>Romilly Cocking</a></span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-49"><time pubdate datetime="2012-12-21T10:52:43+00:00">December 21, 2012 at 10:52</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>I&#8217;m also having problems with github. I will investigate. Of course, github is an independent site over which we have no control.</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=49#respond' onclick='return addComment.moveForm("comment-49", "49", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-50">
+		<div class="comment_gravatar">
+			<img alt='' src='http://1.gravatar.com/avatar/b943f56a68f79a1346a8f1ed84086458?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-50" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">Tony Goodhew</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-50"><time pubdate datetime="2013-02-11T13:37:30+00:00">February 11, 2013 at 13:37</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>11 Feb 2013. Tried to install git core but all I got was a mass of failures, missing files and errors.<br />
+I fear that I will not be able to get my newly ordered boards to work when they arrive unless a a different method of supplying the essential software is provided. This problem appears to have been going on for a long time. Any ideas about a simple download of the current library just to get us started?</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=50#respond' onclick='return addComment.moveForm("comment-50", "50", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-romilly-cocking bypostauthor odd alt depth-2" id="li-comment-51">
+		<div class="comment_gravatar">
+			<img alt='' src='http://0.gravatar.com/avatar/a92de8a103246b99e073fd63f360f878?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-51" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn"><a href='http://www.quick2wire.com' rel='external nofollow' class='url'>Romilly Cocking</a></span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-51"><time pubdate datetime="2013-02-11T13:48:19+00:00">February 11, 2013 at 13:48</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>I&#8217;m guessing that you have not updated the libraries on your Pi distribution.</p>
+<p>in a terminal window, type<br />
+<code>sudo apt-get update</code><br />
+ and then<br />
+<code>sudo apt-get upgrade</code></p>
+<p>wait a while as the Pi brings itself up-to-date. This can take a few minutes if your internet or your SD card are slow.</p>
+<p>Then<br />
+<code>sudo apt-get install git-core</code><br />
+should work and you&#8217;ll be ready to go.</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=51#respond' onclick='return addComment.moveForm("comment-51", "51", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment even depth-3" id="li-comment-67">
+		<div class="comment_gravatar">
+			<img alt='' src='http://1.gravatar.com/avatar/98bddf33e54526e41c7a760e53c8ee11?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-67" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">Jorge</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-67"><time pubdate datetime="2013-05-15T21:14:56+00:00">May 15, 2013 at 21:14</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>This solved the problem!! Thanks!!</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=67#respond' onclick='return addComment.moveForm("comment-67", "67", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+</ul>
+</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-52">
+		<div class="comment_gravatar">
+			<img alt='' src='http://1.gravatar.com/avatar/b943f56a68f79a1346a8f1ed84086458?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-52" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">Tony Goodhew</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-52"><time pubdate datetime="2013-02-11T19:05:55+00:00">February 11, 2013 at 19:05</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>Downloads and installs have all worked OK and I have all the necessary files in<br />
+~/git/quick2wire-python-api</p>
+<p>How do I add this location to my Python Path?</p>
+<p>Sorry to be so thick &#8211; I can do Arduino but Linux/python is still a steep learning curve &#8211; I still need explicit instructions.</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=52#respond' onclick='return addComment.moveForm("comment-52", "52", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-badams even depth-2" id="li-comment-54">
+		<div class="comment_gravatar">
+			<img alt='' src='http://1.gravatar.com/avatar/5ca842d17f85413eb5adf455b53d1d0f?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-54" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">Brian Adams</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-54"><time pubdate datetime="2013-02-11T22:04:32+00:00">February 11, 2013 at 22:04</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>You&#8217;ll need to run &#8216;export PYTHONPATH=$PYTHONPATH:~/git/quick2wire-python-api&#8217;. </p>
+<p>See the full instructions here: <a href="https://github.com/quick2wire/quick2wire-python-api#installation" rel="nofollow">https://github.com/quick2wire/quick2wire-python-api#installation</a>.</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=54#respond' onclick='return addComment.moveForm("comment-54", "54", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-53">
+		<div class="comment_gravatar">
+			<img alt='' src='http://0.gravatar.com/avatar/e3d20b25bff61587f3780b45e8c96a47?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-53" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">Mal</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-53"><time pubdate datetime="2013-02-11T21:49:07+00:00">February 11, 2013 at 21:49</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>QUick question if you have a lot of clone software you have downloaded and want to update them all the same time do you know where or how to create a script to update them? </p>
+<p>Let&#8217;s say the software are all located in the opt folder or /pentest folder in backtrack. How would you update all the software?</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=53#respond' onclick='return addComment.moveForm("comment-53", "53", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-55">
+		<div class="comment_gravatar">
+			<img alt='' src='http://1.gravatar.com/avatar/b943f56a68f79a1346a8f1ed84086458?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-55" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">Tony Goodhew</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-55"><time pubdate datetime="2013-02-17T14:45:12+00:00">February 17, 2013 at 14:45</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>I&#8217;m sorry to be difficult but having set the PYTHONPATH I find the the rest of the instructions using python-pip and python-virtualenv totally incomprehendable. </p>
+<p>Your boards are a delight to solder up but many of your customers will find installing the libraries from these instructions impossible and frustrating. (I got as far setting PYTHONPATH from the note above totally failed to follow how to use python-pip or python-virtualenv.)</p>
+<p>I understand that the software is still underdevelopment, adding interrupt control and pwm etc, but a basic library to just set pin directions in/out, set output values and read input values, which is EASY to install is vital. I&#8217;m thinking of some command like:<br />
+             wget <a href="http://quick2wire.com/download/install.txt" rel="nofollow">http://quick2wire.com/download/install.txt</a> | bash</p>
+<p>An improved library with extra bells and whistles could be installed later.</p>
+<p>Sorry to appear so negative but I&#8217;ve spent 4 times as long on trying to install the sofware (unsuccessfully) as I spent building the boards.</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=55#respond' onclick='return addComment.moveForm("comment-55", "55", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-romilly-cocking bypostauthor odd alt depth-2" id="li-comment-56">
+		<div class="comment_gravatar">
+			<img alt='' src='http://0.gravatar.com/avatar/a92de8a103246b99e073fd63f360f878?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-56" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn"><a href='http://www.quick2wire.com' rel='external nofollow' class='url'>Romilly Cocking</a></span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-56"><time pubdate datetime="2013-02-17T14:52:24+00:00">February 17, 2013 at 14:52</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>Hi Tony,</p>
+<p>We have a library version that should be as easy to install as you would like.  At present the website doesn&#8217;t make it clear how to install it. I&#8217;ll fix this tomorrow and will post a link here.</p>
+<p>Romilly</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=56#respond' onclick='return addComment.moveForm("comment-56", "56", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-57">
+		<div class="comment_gravatar">
+			<img alt='' src='http://1.gravatar.com/avatar/b943f56a68f79a1346a8f1ed84086458?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-57" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">Tony Goodhew</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-57"><time pubdate datetime="2013-02-20T19:02:37+00:00">February 20, 2013 at 19:02</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>Any chance of this simple to install basic (read/write registers) i2c library by the weekend?</p>
+<p>Regards</p>
+<p>Tony Goodhew</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=57#respond' onclick='return addComment.moveForm("comment-57", "57", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment odd alt depth-2" id="li-comment-58">
+		<div class="comment_gravatar">
+			<img alt='' src='http://1.gravatar.com/avatar/b943f56a68f79a1346a8f1ed84086458?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-58" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">Tony Goodhew</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-58"><time pubdate datetime="2013-03-02T18:58:59+00:00">March 2, 2013 at 18:58</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>Still still not managed to get a working version of the essential software for I2C and Python API. How about putting an SD card image of a properly running installation on your site with some example Python code in the user&#8217;s directory? This would be easy to download and very simple to install on a new card.</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=58#respond' onclick='return addComment.moveForm("comment-58", "58", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-romilly-cocking bypostauthor even depth-3" id="li-comment-59">
+		<div class="comment_gravatar">
+			<img alt='' src='http://0.gravatar.com/avatar/a92de8a103246b99e073fd63f360f878?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-59" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn"><a href='http://www.quick2wire.com' rel='external nofollow' class='url'>Romilly Cocking</a></span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-59"><time pubdate datetime="2013-03-02T19:03:57+00:00">March 2, 2013 at 19:03</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>That&#8217;s a great idea, and we may be able to do it tomorrow.</p>
+<p>Sorry you&#8217;ve been having such trouble. We&#8217;ve had technical hassles of our own (now resolved) which is why we have been slow to respond.</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=59#respond' onclick='return addComment.moveForm("comment-59", "59", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment odd alt depth-4" id="li-comment-60">
+		<div class="comment_gravatar">
+			<img alt='' src='http://1.gravatar.com/avatar/b943f56a68f79a1346a8f1ed84086458?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-60" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">Tony Goodhew</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-60"><time pubdate datetime="2013-03-03T10:22:30+00:00">March 3, 2013 at 10:22</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>Please include code examples for using the new analog board which is currently on order. ie read from an ATD port and write to the DTA port.</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=60#respond' onclick='return addComment.moveForm("comment-60", "60", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment even depth-5" id="li-comment-61">
+		<div class="comment_gravatar">
+			<img alt='' src='http://1.gravatar.com/avatar/b943f56a68f79a1346a8f1ed84086458?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-61" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">Tony Goodhew</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-61"><time pubdate datetime="2013-03-06T16:38:16+00:00">March 6, 2013 at 16:38</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>Any news about this SD card image as I am still unable to get your api to install and am only able to use port extender in python 2 with smbus?</p>
+<p>I&#8217;ve just built your Analogue board. Is there any info on how to use it?</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-62">
+		<div class="comment_gravatar">
+			<img alt='' src='http://1.gravatar.com/avatar/f60830492175f2e16bc60d70949dbc4d?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-62" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">Romilly Cocking</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-62"><time pubdate datetime="2013-03-06T18:21:00+00:00">March 6, 2013 at 18:21</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>Tony, I&#8217;m creating a fresh image with all our software; I will put it up on our website tomorrow.</p>
+<p>I hope we can post a basic guide to using the PCF8591 library with the analogue board tomorrow also.</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=62#respond' onclick='return addComment.moveForm("comment-62", "62", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment even depth-2" id="li-comment-63">
+		<div class="comment_gravatar">
+			<img alt='' src='http://1.gravatar.com/avatar/b943f56a68f79a1346a8f1ed84086458?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-63" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">Tony Goodhew</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-63"><time pubdate datetime="2013-03-21T15:05:53+00:00">March 21, 2013 at 15:05</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>Is the card image available somewhere? I&#8217;ve not managed to find it and still cannot get past PythonPath bit. Using virtualenv without simpler/fuller instructions is still too big a step.</p>
+<p>I can only access the boards via smbus.</p>
+<p>Tony Goodhew</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=63#respond' onclick='return addComment.moveForm("comment-63", "63", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment odd alt depth-3" id="li-comment-64">
+		<div class="comment_gravatar">
+			<img alt='' src='http://1.gravatar.com/avatar/f60830492175f2e16bc60d70949dbc4d?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-64" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn"><a href='http://quick2wire.com' rel='external nofollow' class='url'>Romilly Cocking</a></span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-64"><time pubdate datetime="2013-03-21T17:44:58+00:00">March 21, 2013 at 17:44</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>We made a card image but did it on an 8 GB card, so the image is a huge download. We&#8217;re going to re-flash one on a 4Gb card, and may be able to put the image up tomorrow.</p>
+<p>I am sorry you&#8217;ve had such a wait but we have been dealing with an order for 5000 kits (not a typo!) so things have been really, really mad and lots of important things have slipped.</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=64#respond' onclick='return addComment.moveForm("comment-64", "64", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment even depth-4" id="li-comment-65">
+		<div class="comment_gravatar">
+			<img alt='' src='http://1.gravatar.com/avatar/b943f56a68f79a1346a8f1ed84086458?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-65" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn">Tony Goodhew</span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-65"><time pubdate datetime="2013-03-21T19:11:55+00:00">March 21, 2013 at 19:11</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>Thanks for the reply. I&#8217;m really glad the business has been going so well. I love the boards and have learned a great deal working everything out from first principles and chip data sheets.</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"><a class='comment-reply-link' href='/articles/a-gentle-guide-to-git-and-github/?replytocom=65#respond' onclick='return addComment.moveForm("comment-65", "65", "respond", "103")'>Reply</a></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-romilly-cocking bypostauthor odd alt depth-5" id="li-comment-66">
+		<div class="comment_gravatar">
+			<img alt='' src='http://0.gravatar.com/avatar/a92de8a103246b99e073fd63f360f878?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />		</div>
+		<div id="comment-66" class="comment">
+			<div class="comment-author vcard">
+				<span class="fn"><a href='http://www.quick2wire.com' rel='external nofollow' class='url'>Romilly Cocking</a></span> <div class="comment-meta"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/#comment-66"><time pubdate datetime="2013-03-25T19:47:04+00:00">March 25, 2013 at 19:47</time></a>
+								</div>
+			</div><!-- .comment-author .vcard -->
+
+						<div class="comment-content"><p>It never seems to be as simple as I hope <img src='http://quick2wire.com/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+<p>The image we built is 800Mb when zipped. We can&#8217;t upload that big a file on wordpress, and the services we use for our test servers would only allow a download or so a day. So I&#8217;ve posted you an SD card with raspbian and all our software on, installed and configured, in the hope that this will help you get going.</p>
+</div>
+
+			<p class="reply">
+        <span class="btn"></span>
+			</p><!-- .reply -->
+		</div><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+			</ol>
+			<div class="comment-nav">
+				<div class="alignleft"></div>
+				<div class="alignright"></div>
+			</div>
+</div>
+	
+
+	<div id="comment-form">
+													<div id="respond">
+				<h3 id="reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/articles/a-gentle-guide-to-git-and-github/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://quick2wire.com/wp-comments-post.php" method="post" id="commentform">
+																			<p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>							<p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required='true' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-required='true' /></p>
+<p class="comment-form-url"><label for="url">Website</label><input id="url" name="url" type="text" value="" size="30" /></p>
+												<p class="comment-form-comment"><label for="comment">Comment</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>						<p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="Post Comment" />
+							<input type='hidden' name='comment_post_ID' value='103' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+						<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="a7e0e7c53f" /></p>					</form>
+							</div><!-- #respond -->
+									</div>
+	</div>
+
+<div id="sidebar-bottom">
+	<aside id="sidebar-1" class="sidebar">
+
+		<div id="social_links-2" class="widget widget_social_links"><h4 class="widgettitle">Follow Us</h4><ul><li class="widget_sociallinks"><a href="https://twitter.com/quick2wire" class="twitter" target="_blank">@Quick2Wire</a></li></ul></div><div id="nav_menu-3" class="widget widget_nav_menu"><h4 class="widgettitle">Aritcles</h4><div class="menu-articles-container"><ul id="menu-articles" class="menu"><li id="menu-item-525" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-525"><a href="http://quick2wire.com/articles/testing-the-i2c-analogue-board-part-1/">Testing the I2C Analogue Board &#8211; part 1</a></li>
+<li id="menu-item-526" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-526"><a href="http://quick2wire.com/articles/getting-started-with-quick2wire-boards/">Getting Started With Quick2Wire Boards</a></li>
+<li id="menu-item-527" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-527"><a href="http://quick2wire.com/articles/beta-kit/">Getting Started with the Beta kit</a></li>
+<li id="menu-item-528" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-528"><a href="http://quick2wire.com/articles/how-to-add-quick2wire-as-a-raspbian-software-source/">How to Add Quick2Wire as a Raspbian Software Source</a></li>
+<li id="menu-item-529" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-529"><a href="http://quick2wire.com/articles/physical-python-part-1/">Physical Python &#8211; Part 1</a></li>
+<li id="menu-item-530" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-530"><a href="http://quick2wire.com/articles/working-safely-with-your-pi/">Working safely with your Pi</a></li>
+<li id="menu-item-531" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-103 current_page_item menu-item-531"><a href="http://quick2wire.com/articles/a-gentle-guide-to-git-and-github/">A gentle guide to Git and GitHub</a></li>
+<li id="menu-item-532" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-532"><a href="http://quick2wire.com/articles/i2c-and-spi/">I2C and SPI</a></li>
+</ul></div></div>		<div id="recent-posts-2" class="widget widget_recent_entries">		<h4 class="widgettitle">Recent Posts</h4>		<ul>
+					<li>
+				<a href="http://quick2wire.com/c3pi-and-the-raspberry-pi-learn-another-language/" title="C3Pi and the Raspberry Pi learn another language">C3Pi and the Raspberry Pi learn another language</a>
+						</li>
+					<li>
+				<a href="http://quick2wire.com/website-update/" title="Website update">Website update</a>
+						</li>
+					<li>
+				<a href="http://quick2wire.com/pi-and-arduino-linked-via-i2c/" title="Raspberry Pi and Arduino linked via I2C">Raspberry Pi and Arduino linked via I2C</a>
+						</li>
+					<li>
+				<a href="http://quick2wire.com/the-babelboard-is-coming/" title="The Babelboard is coming">The Babelboard is coming</a>
+						</li>
+					<li>
+				<a href="http://quick2wire.com/thumbs-up-for-qcon-london/" title="Thumbs up for QCon London">Thumbs up for QCon London</a>
+						</li>
+				</ul>
+		</div><div id="archives-2" class="widget widget_archive"><h4 class="widgettitle">Archives</h4>		<ul>
+			<li><a href='http://quick2wire.com/2013/04/' title='April 2013'>April 2013</a></li>
+	<li><a href='http://quick2wire.com/2013/03/' title='March 2013'>March 2013</a></li>
+	<li><a href='http://quick2wire.com/2013/02/' title='February 2013'>February 2013</a></li>
+	<li><a href='http://quick2wire.com/2013/01/' title='January 2013'>January 2013</a></li>
+	<li><a href='http://quick2wire.com/2012/12/' title='December 2012'>December 2012</a></li>
+	<li><a href='http://quick2wire.com/2012/11/' title='November 2012'>November 2012</a></li>
+	<li><a href='http://quick2wire.com/2012/08/' title='August 2012'>August 2012</a></li>
+	<li><a href='http://quick2wire.com/2012/07/' title='July 2012'>July 2012</a></li>
+	<li><a href='http://quick2wire.com/2012/06/' title='June 2012'>June 2012</a></li>
+	<li><a href='http://quick2wire.com/2012/05/' title='May 2012'>May 2012</a></li>
+	<li><a href='http://quick2wire.com/2012/04/' title='April 2012'>April 2012</a></li>
+	<li><a href='http://quick2wire.com/2012/03/' title='March 2012'>March 2012</a></li>
+		</ul>
+</div><div id="categories-2" class="widget widget_categories"><h4 class="widgettitle">Categories</h4>		<ul>
+	<li class="cat-item cat-item-2"><a href="http://quick2wire.com/category/api/" title="View all posts filed under API">API</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://quick2wire.com/category/arduino/" title="View all posts filed under Arduino">Arduino</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://quick2wire.com/category/gpio/" title="View all posts filed under GPIO">GPIO</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://quick2wire.com/category/hardware/" title="View all posts filed under Hardware">Hardware</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="http://quick2wire.com/category/i2c/" title="View all posts filed under I2C">I2C</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="http://quick2wire.com/category/news/" title="View all posts filed under News">News</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="http://quick2wire.com/category/programming/" title="View all posts filed under Programming">Programming</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://quick2wire.com/category/python/" title="View all posts filed under Python">Python</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="http://quick2wire.com/category/raspberry-pi/" title="View all posts filed under Raspberry Pi">Raspberry Pi</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="http://quick2wire.com/category/spi/" title="View all posts filed under SPI">SPI</a>
+</li>
+		</ul>
+</div><div id="search-2" class="widget widget_search">			<form method="get" id="sidebarsearch" action="http://quick2wire.com" >
+				<label class="hidden" for="s">Search:</label>
+				<div>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" /> 
+				</div>
+			</form>	
+</div>
+	</aside>
+
+	<aside id="sidebar-2" class="sidebar">
+
+		
+	</aside>
+</div>
+		</section><!-- end main section -->
+	<footer id="footer">
+        <div class="office-address">&copy; 2014 Quick2Wire.com  All rights reserved.</div>
+	  <div class="right"><a href="http://picomol.de/picochic/" rel="nofollow">Design by picomol</a>.</div>
+	</footer>
+</div>
+		<!--stats_footer_test--><script src="http://stats.wordpress.com/e-201404.js" type="text/javascript"></script>
+<script type="text/javascript">
+st_go({blog:'55678499',v:'ext',post:'103'});
+var load_cmc = function(){linktracker_init(55678499,103,2);};
+if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+else load_cmc();
+</script>
+</body>
+</html>
+
+<!-- ClickTale Bottom part -->
+<div id="ClickTaleDiv" style="display: none;"></div>
+<script type="text/javascript">
+if(document.location.protocol!='https:')
+  document.write(unescape("%3Cscript%20src='http://s.clicktale.net/WRe0.js'%20type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+if(typeof ClickTale=='function') ClickTale(20235,0.03,"www14");
+</script>
+<!-- ClickTale end of Bottom part -->
+
+
+
